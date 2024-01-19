@@ -14,9 +14,12 @@ public class EjemploStringTestRendimientoConcat {
 
     }
 
+    System.gc();
+
     long fin = System.currentTimeMillis();
     System.out.println(fin - inicio);
     System.out.println("c = " + c);
-        System.out.println("sb = " + sb);
+    System.out.println("sb = " + sb);
+    System.exit(0);
     }
 }
