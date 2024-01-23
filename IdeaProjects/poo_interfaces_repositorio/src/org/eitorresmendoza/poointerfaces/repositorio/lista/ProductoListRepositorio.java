@@ -4,6 +4,7 @@ import org.eitorresmendoza.poointerfaces.modelo.Cliente;
 import org.eitorresmendoza.poointerfaces.modelo.Producto;
 import org.eitorresmendoza.poointerfaces.repositorio.AbstractaListRepositorio;
 import org.eitorresmendoza.poointerfaces.repositorio.Direccion;
+import org.eitorresmendoza.poointerfaces.repositorio.excepciones.LecturaAccesoDatoException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 public class ProductoListRepositorio extends AbstractaListRepositorio<Producto> {
 
     @Override
-    public void editar(Producto producto) {
+    public void editar(Producto producto) throws LecturaAccesoDatoException {
         Producto p = porId(producto.getId());
         p.setDescripcion(producto.getDescripcion());
         p.setPrecio(producto.getPrecio());

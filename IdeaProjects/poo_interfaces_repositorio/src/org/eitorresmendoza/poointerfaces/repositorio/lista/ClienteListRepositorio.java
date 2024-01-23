@@ -3,6 +3,7 @@ package org.eitorresmendoza.poointerfaces.repositorio.lista;
 import org.eitorresmendoza.poointerfaces.modelo.Cliente;
 import org.eitorresmendoza.poointerfaces.repositorio.AbstractaListRepositorio;
 import org.eitorresmendoza.poointerfaces.repositorio.Direccion;
+import org.eitorresmendoza.poointerfaces.repositorio.excepciones.LecturaAccesoDatoException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente> {
 
     @Override
-    public void editar(Cliente cliente) {
+    public void editar(Cliente cliente) throws LecturaAccesoDatoException {
         Cliente clienteEditar = this.porId(cliente.getId());
         clienteEditar.setNombre(cliente.getNombre());
         clienteEditar.setApellido(cliente.getApellido());
