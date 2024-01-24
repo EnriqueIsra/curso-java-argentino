@@ -1,4 +1,4 @@
-package org.eitorresmendoza.ejemplos.set;
+package org.eitorresmendoza.ejemplos.list;
 
 import org.eitorresmendoza.ejemplos.modelo.Alumno;
 
