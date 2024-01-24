@@ -32,7 +32,7 @@ public class Alumno implements Comparable<Alumno> {
 
     @Override
     public String toString() {
-        return nombre + " - calificación = " + numeroDeControl + "\n";
+        return nombre + " - calificación = " + numeroDeControl;
     }
 
     @Override
