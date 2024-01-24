@@ -38,7 +38,7 @@ public class EjemploArrayList {
         for (int i = 0; i < a.length; i++) {
             System.out.println("Desde el arreglo: " + a[i]);
         }
-
+        
     }
 }
 
