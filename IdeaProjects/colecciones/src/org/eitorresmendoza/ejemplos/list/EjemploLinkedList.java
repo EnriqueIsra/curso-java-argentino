@@ -1,8 +1,9 @@
-package org.eitorresmendoza.ejemplos.set;
+package org.eitorresmendoza.ejemplos.list;
 
 import org.eitorresmendoza.ejemplos.modelo.Alumno;
 
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 
 public class EjemploLinkedList {
@@ -51,6 +52,18 @@ public class EjemploLinkedList {
         alumnoLinkedList.set(3,new Alumno("Eduard", 32));
         System.out.println(alumnoLinkedList + ", size = " + alumnoLinkedList.size());
 
+        ListIterator<Alumno> alumnoListIterator = alumnoLinkedList.listIterator();
+
+        System.out.println("*********** Next");
+        while (alumnoListIterator.hasNext()){
+            Alumno alumno = alumnoListIterator.next();
+            System.out.println(alumno);
+        }
+        System.out.println("*********** Previous");
+        while (alumnoListIterator.hasPrevious()){
+            Alumno alumno = alumnoListIterator.previous();
+            System.out.println(alumno);
+        }
     }
 }
 
