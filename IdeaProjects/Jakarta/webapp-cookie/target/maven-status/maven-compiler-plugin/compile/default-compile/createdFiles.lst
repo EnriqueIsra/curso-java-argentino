@@ -1,0 +1,8 @@
+org\eitorresmendoza\apiservlet\webapp\headers\controllers\LoginServlet.class
+org\eitorresmendoza\apiservlet\webapp\headers\controllers\LogoutServlet.class
+org\eitorresmendoza\apiservlet\webapp\headers\services\LoginServiceImpl.class
+org\eitorresmendoza\apiservlet\webapp\headers\services\ProductoService.class
+org\eitorresmendoza\apiservlet\webapp\headers\services\LoginService.class
+org\eitorresmendoza\apiservlet\webapp\headers\services\ProductoServiceImpl.class
+org\eitorresmendoza\apiservlet\webapp\headers\models\Producto.class
+org\eitorresmendoza\apiservlet\webapp\headers\controllers\ProductoServlet.class

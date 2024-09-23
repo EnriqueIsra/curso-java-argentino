@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6c1cf14e-70a3-4c0f-b111-ac0814277eda" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateCrear.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateCriteria.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateCriteriaBusquedaDinamica.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateCrudService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateEditar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateEliminar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateListar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernatePorId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateQL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateResultListWhere.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateSingleResultWhere.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/dominio/ClienteDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/entity/Auditoria.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/entity/Cliente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/repositories/ClienteRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/repositories/CrudRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/services/ClienteService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/services/ClienteServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/java/org/eitorresmendoza/hibernateapp/util/JpaUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-app/src/main/resources/import.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionManyToMany.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionManyToManyBidireccional.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionManyToManyFind.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionManyToManyFindBidireccional.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionManyToOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionManyToOneFind.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionOneToMany.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionOneToManyBidireccional.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionOneToManyBidireccionalFind.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionOneToManyFind.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionOneToOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionOneToOneBidireccional.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionOneToOneBidireccionalFind.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateAsociacionOneToOneFind.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateFetchLazyOneToMany.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateFetchLazyOneToManyJoinFetch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateFetchManyToMany.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateFetchManyToOneCriteria.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateFetchOneToManyCriteria.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/HibernateFetchResultList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/entity/Alumno.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/entity/ClienteDetalle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/entity/Curso.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/entity/Direccion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hibernate-jpa-asociaciones-app/src/main/java/org/eitorresmendoza/hibernateapp/entity/Factura.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9/src/main/webapp/listar.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/controllers/BuscarCursoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/controllers/CursoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/filters/ConexionFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/models/Curso.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/repositories/CursoRepositorioImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/repositories/Repository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/services/CursoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/services/CursoServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/services/ServiceJdbcException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/util/ConexionBaseDatos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique/src/main/webapp/listar.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/configs/ProducerResources.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/controllers/BuscarCursoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/controllers/CursoEliminarServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/controllers/CursoFormServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/controllers/CursoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/filters/ConexionFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/interceptors/TransactionalInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/interceptors/TransactionalJdbc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/models/Curso.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/repositories/CursoRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/repositories/Repository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/services/CursoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/services/CursoServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/services/ServiceJdbcException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/java/org/eitorresmendoza/apiservlet/webapp/bbdd/tarea9/enrique2/util/DataBaseConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/webapp/META-INF/context.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/webapp/WEB-INF/beans.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/webapp/form.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/webapp/layout/footer.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/webapp/layout/header.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-bbdd-tarea9enrique2/src/main/webapp/listar.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-cookie-tarea4/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-cookie-tarea4/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-cookie-tarea4/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-cookie-tarea4/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-cookie-tarea4/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-cookie-tarea4/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-cookie-tarea4/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-cookie-tarea4/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/tarea4/controllers/CambiarColorServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-cookie-tarea4/src/main/webapp/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-cookie/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/controllers/LogoutServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-cookie/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/services/LoginService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-cookie/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/services/LoginServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form-tarea2/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form-tarea2/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form-tarea2/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form-tarea2/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form-tarea2/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form-tarea2/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form-tarea2/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form-tarea2/src/main/java/org/eitorresmendoza/webapp/form/tarea2/RegistroProductoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form-tarea2/src/main/webapp/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form-tarea2/src/main/webapp/form.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form/src/main/java/org/eitorresmendoza/webapp/form/FormServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form/src/main/webapp/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-form/src/main/webapp/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/java/org/eitorresmendoza/apiservlet/webapp/headers/controllers/BuscarProductoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/java/org/eitorresmendoza/apiservlet/webapp/headers/controllers/CabecerasHttpRequestServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/java/org/eitorresmendoza/apiservlet/webapp/headers/controllers/DespacharServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/java/org/eitorresmendoza/apiservlet/webapp/headers/controllers/HoraActualizadaServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/java/org/eitorresmendoza/apiservlet/webapp/headers/controllers/LoginServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/java/org/eitorresmendoza/apiservlet/webapp/headers/controllers/ProductoJsonServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/java/org/eitorresmendoza/apiservlet/webapp/headers/controllers/ProductoXlsServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/java/org/eitorresmendoza/apiservlet/webapp/headers/controllers/RedirigirServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/java/org/eitorresmendoza/apiservlet/webapp/headers/models/Producto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/java/org/eitorresmendoza/apiservlet/webapp/headers/services/ProductoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/java/org/eitorresmendoza/apiservlet/webapp/headers/services/ProductoServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/webapp/buscar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/webapp/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-headers/src/main/webapp/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-jpa/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/interceptors/TransactionalJpa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-jpa/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/interceptors/TransactionalJpaInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-jpa/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/repositories/CategoriaRepositoryJpaImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-jpa/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/repositories/ProductoRepositoryJpaImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-jpa/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/repositories/RepositoryJdbc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-jpa/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/repositories/RepositoryJpa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-jpa/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/repositories/UsuarioRepositoryJpaImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-jpa/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/services/ProductoServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-jpa/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/util/JpaUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-jpa/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-produces-factura-tarea15/src/main/java/org/example/eitorresmendoza/webapp/produces/factura/tarea15/config/ProduceResources.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-produces-factura-tarea15/src/main/java/org/example/eitorresmendoza/webapp/produces/factura/tarea15/controllers/FacturaServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-produces-factura-tarea15/src/main/java/org/example/eitorresmendoza/webapp/produces/factura/tarea15/models/Cliente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-produces-factura-tarea15/src/main/java/org/example/eitorresmendoza/webapp/produces/factura/tarea15/models/Factura.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-produces-factura-tarea15/src/main/java/org/example/eitorresmendoza/webapp/produces/factura/tarea15/models/LineaFactura.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-produces-factura-tarea15/src/main/java/org/example/eitorresmendoza/webapp/produces/factura/tarea15/models/Producto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-produces-factura-tarea15/src/main/webapp/WEB-INF/beans.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-produces-factura-tarea15/src/main/webapp/factura.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-produces-factura-tarea15/src/main/webapp/layout/footer.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-produces-factura-tarea15/src/main/webapp/layout/header.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session-tarea5/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session-tarea5/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session-tarea5/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session-tarea5/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session-tarea5/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session-tarea5/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session-tarea5/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session-tarea5/src/main/java/org/eitorresmendoza/apiservlet/webapp/session/tarea5/controllers/GuardarNombreSessionServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session-tarea5/src/main/java/org/eitorresmendoza/apiservlet/webapp/session/tarea5/controllers/PerfilusuarioServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session-tarea5/src/main/webapp/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/configs/CarroCompra.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/configs/MysqlConn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/configs/ProducerResources.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/configs/ProductoServicePrincipal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/configs/Repository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/configs/Service.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/controllers/ActualizarCarroServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/controllers/AgregarCarroServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/controllers/IndexServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/controllers/ProductoEliminarServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/controllers/ProductoFormServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/controllers/VerCarroServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/controllers/usuarios/UsuarioEliminarServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/controllers/usuarios/UsuarioFormServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/controllers/usuarios/UsuarioServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/filters/ConnectionFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/filters/LoginFiltro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/filters/TiempoTranscurridoFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/interceptors/Logging.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/interceptors/LoggingInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/interceptors/TransactionalInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/interceptors/TransactionalJdbc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/listeners/AplicacionListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/listeners/AplicacionTareaListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/models/Carro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/models/Categoria.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/models/ItemCarro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/models/Usuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/repositories/CategoriaRepositoryJdbcImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/repositories/CrudRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/repositories/ProductoRepositoryJdbcImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/repositories/UsuarioRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/repositories/UsuarioRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/services/LoginServiceSessionImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/services/ProductoServiceJdbcImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/services/ServiceJdcbException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/services/UsuarioService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/services/UsuarioServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/util/DataBaseConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/java/org/eitorresmendoza/apiservlet/webapp/cookie/util/DataBaseConnectionDS.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/webapp/META-INF/context.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/webapp/WEB-INF/beans.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/webapp/carro.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/webapp/form.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/webapp/layout/footer.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/webapp/layout/header.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/webapp/listar.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/webapp/usuarios/form.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-session/src/main/webapp/usuarios/listar.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-tarea1/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp-tarea1/src/main/java/org/eitorresmendoza/webapp/tarea1/servlet/IndexServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp/src/main/java/org/eitorresmendoza/webapp/servlet/HolaMundoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp/src/main/java/org/eitorresmendoza/webapp/servlet/ParametroGetServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webapp/src/main/webapp/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../app-mockito3/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../app-mockito3/src/main/java/org/eitorresmendoza/appmockito3/ejemplo/models/Examen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../app-mockito3/src/main/java/org/eitorresmendoza/appmockito3/ejemplo/repositories/ExamenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../app-mockito3/src/main/java/org/eitorresmendoza/appmockito3/ejemplo/repositories/ExamenRepositoryOtro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../app-mockito3/src/main/java/org/eitorresmendoza/appmockito3/ejemplo/repositories/PreguntaRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../app-mockito3/src/main/java/org/eitorresmendoza/appmockito3/ejemplo/services/ExamenService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../app-mockito3/src/main/java/org/eitorresmendoza/appmockito3/ejemplo/services/ExamenServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../app-mockito3/src/test/java/org/eitorresmendoza/appmockito3/ejemplo/services/Datos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../app-mockito3/src/test/java/org/eitorresmendoza/appmockito3/ejemplo/services/ExamenServiceImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../junit5_app/src/main/resources/data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../junit5_app/src/main/resources/data2.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../junit5_app/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../junit5_app/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../junit5_app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../junit5_app/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../junit5_app/src/test/java/org/eitorresmendoza/junit5app/ejemplo/models/CuentaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../junit5_app/src/test/java/org/eitorresmendoza/junit5app/ejemplo/models/CuentaTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2m24IZC7Sao01ZTaQZW520vEhr2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/siril/OneDrive/Documentos/proyectos/cursos_udemy/curso-java-argentino/IdeaProjects/Jakarta/webapp-jpa-profe"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="tomcat7" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="tomcat7:redeploy" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6c1cf14e-70a3-4c0f-b111-ac0814277eda" name="Changes" comment="" />
+      <created>1726261259148</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1726261259148</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -1,0 +1,6 @@
+org\eitorresmendoza\webapp\ejb\repositories\UsuarioRepositoryImpl.class
+org\eitorresmendoza\webapp\ejb\repositories\UsuarioRepository.class
+org\eitorresmendoza\webapp\ejb\entities\Usuario.class
+org\eitorresmendoza\webapp\ejb\services\UsuarioServiceImpl.class
+org\eitorresmendoza\webapp\ejb\ProducerResources.class
+org\eitorresmendoza\webapp\ejb\services\UsuarioService.class
