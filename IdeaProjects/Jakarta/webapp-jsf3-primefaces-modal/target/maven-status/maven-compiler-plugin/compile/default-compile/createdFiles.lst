@@ -1,0 +1,13 @@
+org\eitorresmendoza\webapp\jsf3\repositories\ProductoRepositoryImpl.class
+org\eitorresmendoza\webapp\jsf3\services\ProductoService.class
+org\eitorresmendoza\webapp\jsf3\controllers\LenguajeController.class
+org\eitorresmendoza\webapp\jsf3\ProducerEntityManager.class
+org\eitorresmendoza\webapp\jsf3\repositories\ProductoRepository.class
+org\eitorresmendoza\webapp\jsf3\repositories\CrudRepository.class
+org\eitorresmendoza\webapp\jsf3\entities\Categoria.class
+org\eitorresmendoza\webapp\jsf3\controllers\ProductoController.class
+org\eitorresmendoza\webapp\jsf3\converters\CategoriaConverter.class
+org\eitorresmendoza\webapp\jsf3\repositories\CategoriaRepositoryImpl.class
+org\eitorresmendoza\webapp\jsf3\services\ProductoServiceImpl.class
+org\eitorresmendoza\webapp\jsf3\ProducerResources.class
+org\eitorresmendoza\webapp\jsf3\entities\Producto.class
