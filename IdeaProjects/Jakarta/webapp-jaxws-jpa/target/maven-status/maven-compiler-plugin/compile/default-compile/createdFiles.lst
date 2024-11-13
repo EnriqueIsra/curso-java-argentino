@@ -1,0 +1,6 @@
+org\eitorresmendoza\webapp\jaxws\services\CursoServicioWsImpl.class
+org\eitorresmendoza\webapp\jaxws\repositories\CursoRepositoryImpl.class
+org\eitorresmendoza\webapp\jaxws\services\CursoServicioWs.class
+org\eitorresmendoza\webapp\jaxws\ProducerEntityManager.class
+org\eitorresmendoza\webapp\jaxws\repositories\CursoRepository.class
+org\eitorresmendoza\webapp\jaxws\models\Curso.class

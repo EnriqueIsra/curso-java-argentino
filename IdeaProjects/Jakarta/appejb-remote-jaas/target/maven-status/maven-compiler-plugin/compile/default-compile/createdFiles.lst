@@ -1,0 +1,3 @@
+org\eitorresmendoza\webapp\ejb\models\Producto.class
+org\eitorresmendoza\webapp\ejb\services\ServiceEjb.class
+org\eitorresmendoza\webapp\ejb\services\ServiceEjbRemote.class
