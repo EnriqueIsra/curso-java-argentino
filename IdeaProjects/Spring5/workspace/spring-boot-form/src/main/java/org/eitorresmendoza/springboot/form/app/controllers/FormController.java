@@ -3,6 +3,7 @@ package org.eitorresmendoza.springboot.form.app.controllers;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.eitorresmendoza.springboot.form.app.editors.NombreMayusculaEditor;
 import org.eitorresmendoza.springboot.form.app.models.domain.Usuario;
 import org.eitorresmendoza.springboot.form.app.validation.UsuarioValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class FormController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, "fechaNacimiento", new CustomDateEditor(dateFormat, true)); // "fechaNacimiento" con este string indicamos especificamente el atributo de la clase que queremos aplicar esta validacion
+		
+		binder.registerCustomEditor(String.class, "nombre", new NombreMayusculaEditor());
+		binder.registerCustomEditor(String.class, "apellido", new NombreMayusculaEditor());
 	}
 	@GetMapping("/form")
 	public String form(Model model) {
