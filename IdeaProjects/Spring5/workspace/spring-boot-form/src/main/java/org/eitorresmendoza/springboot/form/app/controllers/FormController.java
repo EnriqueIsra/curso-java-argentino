@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eitorresmendoza.springboot.form.app.editors.NombreMayusculaEditor;
+import org.eitorresmendoza.springboot.form.app.models.domain.Pais;
 import org.eitorresmendoza.springboot.form.app.models.domain.Usuario;
 import org.eitorresmendoza.springboot.form.app.validation.UsuarioValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,28 +29,42 @@ import jakarta.validation.Valid;
 @Controller
 @SessionAttributes("usuario")
 public class FormController {
-	
+
 	@Autowired
 	private UsuarioValidator validator;
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(validator);
-		
-		
+
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, "fechaNacimiento", new CustomDateEditor(dateFormat, true)); // "fechaNacimiento" con este string indicamos especificamente el atributo de la clase que queremos aplicar esta validacion
-		
+		binder.registerCustomEditor(Date.class, "fechaNacimiento", new CustomDateEditor(dateFormat, true));
+		// "fechaNacimiento" con este string indicamos especificamente el atributo de la
+		// clase que queremos aplicar esta validacion
+
 		binder.registerCustomEditor(String.class, "nombre", new NombreMayusculaEditor());
 		binder.registerCustomEditor(String.class, "apellido", new NombreMayusculaEditor());
 	}
-	
+
+	@ModelAttribute("listaPaises")
+	public List<Pais> listaPaises() {
+		return Arrays.asList(
+				new Pais(1, "ES", "España"), 
+				new Pais(2, "MX", "México"), 
+				new Pais(3, "CL", "Chile"),
+				new Pais(4, "AR", "Argentina"), 
+				new Pais(5, "PE", "Perú"), 
+				new Pais(6, "CO", "Colombia"),
+				new Pais(7, "VE", "Venezuela"));
+
+	};
+
 	@ModelAttribute("paises")
 	public List<String> paises() {
-		return Arrays.asList("España", "México", "Chile", "Argentina", "Perú" , "Colombia", "Venezuela");
+		return Arrays.asList("España", "México", "Chile", "Argentina", "Perú", "Colombia", "Venezuela");
 	};
-	
+
 	@ModelAttribute("paisesMap")
 	public Map<String, String> paisesMap() {
 		Map<String, String> paises = new HashMap<String, String>();
@@ -62,7 +77,7 @@ public class FormController {
 		paises.put("VE", "Venezuela");
 		return paises;
 	};
-	
+
 	@GetMapping("/form")
 	public String form(Model model) {
 		Usuario usuario = new Usuario();
@@ -73,17 +88,17 @@ public class FormController {
 		model.addAttribute("usuario", usuario);
 		return "form";
 	}
-	
+
 	@PostMapping("/form")
 	public String procesar(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
-		//validator.validate(usuario, result);
+		// validator.validate(usuario, result);
 		model.addAttribute("titulo", "Resultado form");
-		
-		if(result.hasErrors()) {
-			
+
+		if (result.hasErrors()) {
+
 			return "/form";
 		}
-		
+
 		model.addAttribute("usuario", usuario);
 		status.setComplete();
 		return "resultado";
