@@ -3,7 +3,9 @@ package org.eitorresmendoza.springboot.form.app.controllers;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eitorresmendoza.springboot.form.app.editors.NombreMayusculaEditor;
 import org.eitorresmendoza.springboot.form.app.models.domain.Usuario;
@@ -45,7 +47,20 @@ public class FormController {
 	
 	@ModelAttribute("paises")
 	public List<String> paises() {
-		return Arrays.asList("España", "México", "Chile", "Argentina", "Colombia", "Venezuela");
+		return Arrays.asList("España", "México", "Chile", "Argentina", "Perú" , "Colombia", "Venezuela");
+	};
+	
+	@ModelAttribute("paisesMap")
+	public Map<String, String> paisesMap() {
+		Map<String, String> paises = new HashMap<String, String>();
+		paises.put("ES", "España");
+		paises.put("MX", "México");
+		paises.put("CL", "Chile");
+		paises.put("AR", "Argentina");
+		paises.put("PE", "Perú");
+		paises.put("CO", "Colombia");
+		paises.put("VE", "Venezuela");
+		return paises;
 	};
 	
 	@GetMapping("/form")
@@ -53,7 +68,7 @@ public class FormController {
 		Usuario usuario = new Usuario();
 		usuario.setNombre("Sebas");
 		usuario.setApellido("Torres");
-		usuario.setIdentificador("123.456.789-K");
+		usuario.setIdentificador("12.456.789-K");
 		model.addAttribute("titulo", "Formulario usuarios");
 		model.addAttribute("usuario", usuario);
 		return "form";
