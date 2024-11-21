@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eitorresmendoza.springboot.form.app.editors.NombreMayusculaEditor;
+import org.eitorresmendoza.springboot.form.app.editors.PaisPropertyEditor;
 import org.eitorresmendoza.springboot.form.app.models.domain.Pais;
 import org.eitorresmendoza.springboot.form.app.models.domain.Usuario;
 import org.eitorresmendoza.springboot.form.app.services.PaisService;
@@ -36,6 +37,9 @@ public class FormController {
 	
 	@Autowired
 	private PaisService paisService;
+	
+	@Autowired
+	private PaisPropertyEditor paisEditor;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -49,6 +53,8 @@ public class FormController {
 
 		binder.registerCustomEditor(String.class, "nombre", new NombreMayusculaEditor());
 		binder.registerCustomEditor(String.class, "apellido", new NombreMayusculaEditor());
+		binder.registerCustomEditor(Pais.class, "pais", paisEditor);
+
 	}
 
 	@ModelAttribute("listaPaises")

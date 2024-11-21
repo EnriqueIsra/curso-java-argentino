@@ -8,7 +8,6 @@ public class Pais {
 	
 	private Integer id;
 	
-	@NotBlank
 	private String codigo;
 	private String nombre;
 

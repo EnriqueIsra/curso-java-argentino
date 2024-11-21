@@ -53,7 +53,7 @@ public class Usuario {
 	@Future
 	private Date fechaNacimiento;
 	
-	@Valid
+	@NotNull
 	private Pais pais;
 	
 
