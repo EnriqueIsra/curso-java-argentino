@@ -12,7 +12,7 @@ public class UserController {
 
     @GetMapping({"/view", "/", "/another"})
     public String view(Model model){
-        model.addAttribute("title", "Hola Mundo Spring Boot");
+        model.addAttribute("title", "Hola Mundo Spring Boot!!!");
         model.addAttribute("message", "mensaje");
         model.addAttribute("user", new User("Enrique", "Torres"));
         return "view";
