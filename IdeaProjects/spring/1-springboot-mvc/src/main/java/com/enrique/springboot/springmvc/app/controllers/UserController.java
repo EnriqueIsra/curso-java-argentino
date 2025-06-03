@@ -62,16 +62,13 @@ public class UserController {
     @PostMapping
     public String form(User user, Model model, RedirectAttributes redirect){
 
-        String message ="";
-        if (user.getId() > 0){
-            message = "El usuario " +
-                    user.getName() +
-                    " se ah actualizado con éxito";
-        } else {
-            message = "El usuario " +
-                    user.getName() +
-                    " se ah creado con éxito";
-        }
+        String message = (user.getId() > 0)? "El usuario " +
+                user.getName() +
+                " se ah actualizado con éxito" :
+                "El usuario " +
+                user.getName() +
+                " se ah creado con éxito";
+
         service.save(user);
         redirect.addFlashAttribute("success", message);
         return "users";
