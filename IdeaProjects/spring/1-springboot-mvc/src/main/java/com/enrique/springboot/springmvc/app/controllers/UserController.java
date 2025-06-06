@@ -30,7 +30,7 @@ public class UserController {
         return "view";
     }
 
-    @GetMapping("/form")
+    @GetMapping
     public String list(Model model){
         model.addAttribute("title", "Listado de Usuarios");
         model.addAttribute("users", service.findAll());
@@ -62,16 +62,15 @@ public class UserController {
     @PostMapping
     public String form(User user, Model model, RedirectAttributes redirect){
 
-        String message = (user.getId() > 0)? "El usuario " +
+        String message = (user.getId() != null && user.getId() > 0)? "El usuario " +
                 user.getName() +
                 " se ah actualizado con éxito" :
                 "El usuario " +
                 user.getName() +
                 " se ah creado con éxito";
-
         service.save(user);
         redirect.addFlashAttribute("success", message);
-        return "users";
+        return "redirect:/users";
     }
 
     @GetMapping("/delete/{id}")

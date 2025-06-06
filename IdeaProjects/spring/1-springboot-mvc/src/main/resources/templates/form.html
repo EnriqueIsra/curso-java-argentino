@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Title</title>
 </head>
 <body>
-$END$
+
+<h4 th:text="${title}"></h4>
+<a th:href="@{/users}" th:text="'Volver'" ></a>
+
+
+<form th:action="@{/users}" method="post" th:object="${user}">
+    <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{createdAt}">
+    <div>
+        <label for="name">Nombre</label>
+        <div>
+            <input type="text" th:field="*{name}" id="name">
+        </div>
+    </div>
+
+    <div>
+        <label for="lastname">Apellido</label>
+        <div>
+            <input type="text" th:field="*{lastname}" id="lastname">
+        </div>
+    </div>
+
+    <div>
+        <label for="email">Email</label>
+        <div>
+            <input type="text" th:field="*{email}" id="email">
+        </div>
+    </div>
+
+    <div>
+        <label for="username">Username</label>
+        <div>
+            <input type="text" th:field="*{username}" id="username">
+        </div>
+    </div>
+
+    <div>
+        <label for="password">Password</label>
+        <div>
+            <input type="password" th:field="*{password}" id="password">
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <input type="submit" th:value="${(user.id != null && user.id > 0 ) ? 'Editar' : 'Crear'}">
+        </div>
+    </div>
+</form>
+
 </body>
 </html>
