@@ -5,6 +5,6 @@ import {ProductsApp} from './ProductsApp'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ProductsApp />
+    <ProductsApp title={'Hola mundo React!'} />
   </StrictMode>,
 )

@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { ProductTable } from "./components/ProductTable";
+import { ProductForm } from "./components/ProductForm";
 
 const initProducts = [
   {
@@ -26,10 +27,17 @@ export const ProductsApp = ({ title = "title default" }) => {
         console.log('cargando la página')
     }, [])
 
+    const handlerAddProcuct = (product) => {
+      setProducts([...products, {...product, id: Date.now()}]);
+    }
+
   return (
     <div className="container my-4">
-      <h1>{title}</h1>
+      <h2>{title}</h2>
       <div className="row">
+        <div className="col">
+          <ProductForm handlerAdd={handlerAddProcuct} />
+        </div>
         <div className="col">
           <ProductTable products = {products} />
         </div>
