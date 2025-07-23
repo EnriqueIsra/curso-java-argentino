@@ -22,13 +22,42 @@ export const ProductsApp = ({ title = "title default" }) => {
 
     const [products, setProducts] = useState([])
 
+    const [productSelected, setProductSelected] = useState({
+      id: 0,
+      name: '',
+      description: '',
+      price: ''
+    })
+
     useEffect(() => {
         setProducts(initProducts)
         console.log('cargando la página')
     }, [])
 
     const handlerAddProcuct = (product) => {
-      setProducts([...products, {...product, id: Date.now()}]);
+      if(product.id > 0){
+        setProducts(
+          products.map(prod => {
+            if (prod.id == product.id) {
+              return {...product};
+            }
+            return prod
+          })
+        )
+      } else {
+        setProducts([...products, {...product, id: Date.now()}]);
+      }
+    }
+
+    const handlerProductSelected = (product) => {
+      setProductSelected({...product})
+      console.log(productSelected)
+    }
+
+    const handlerRemoveProduct = (id) => {
+      setProducts(
+        products.filter(product => product.id != id)
+      )
     }
 
   return (
@@ -36,10 +65,19 @@ export const ProductsApp = ({ title = "title default" }) => {
       <h2>{title}</h2>
       <div className="row">
         <div className="col">
-          <ProductForm handlerAdd={handlerAddProcuct} />
+          <ProductForm handlerAdd={handlerAddProcuct} productSelected={productSelected} />
         </div>
         <div className="col">
-          <ProductTable products = {products} />
+          {
+            (products.length > 0) ? 
+            <ProductTable products = {products} 
+            handlerProductSelected={handlerProductSelected} 
+            handlerRemoveProduct={handlerRemoveProduct} />
+            : <div className="alert alert-warning">
+              No hay productos en el sistema
+            </div>
+          }
+          
         </div>
       </div>
     </div>
