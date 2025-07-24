@@ -1,0 +1,36 @@
+CARACTERISTICAS DE ANGULAR
+-Aplicaciones web responsivas
+-SPA: single page application, nunca realiza un refresh, es asincrona y reactiva, todo permanece intacto en el mismo lugar, solo enviamos un json al backend, solamente retorna también el json, es una sola página, lo que cambia es el contenido principal, spa simplemente cambia el contenido principal que son los componentes
+-Reactivo RxJs
+-Asíncrono
+
+VERSIONES, ACTUALIZACIONES Y COMPATIBILIDAD
+9.0.2
+-Mayor 9, 
+-Menor .0 (Nuevas caracteristicas)
+-Arreglo de Bugs .2
+
+LENGUAJE DE PROGRAMACION TYPESCRIPT
+-Es un subconjunto de JavaScript (ECMAScript)
+-Tipos basados en clases e interfaces
+-Tipo de datos más fuerte
+-Atributos, métodos y constructores
+-Tipos Generics
+Decoradores y más
+
+COMPONENTES PRINCIPALES DE ANGULAR
+-Componentes (menú de navegación, banner, etc. también tenemos el componente principal, cambiando de forma dinamica, siempre se mantiene en una sola página, tiene un decorador especifico -component- los componentes son asíncronos, entre si, no se interrumpen, todo se ejecutan de forma paralela)
+-Plantillas (es la clase que hay por detrás, el html, atributos del componente, elementos html, mostrarlos o no mostrarlos, eventos en los botones en las tablas, por ejemplo el evento tipico change, tambien el click, para que llame o invoque un metodo)
+-Directivas
+-Eventos
+-Pipe (Filtros que permiten modificar y dar formato a la vista, por ejemplo, fecha, moneda, angular ya tiene pipe definidos)
+-Rutas de navegacion
+-Decoradores
+-Servicios y HttpClient (permite comunicarnos mediante verbos del request, post, get, pus, delete, todo asincrono)
+-Clases TypeScript (podemos crear nuestrar propias clases de typescript -de utilidad, helpers, de modelo, mapeado a los json, json o pojo en java)
+-Formulario 
+-Data Binding ngModel (para poblar datos, directiva que permite mapoear un formulario a una clase de tyupescript de forma automatica para que se vayan poblando los datos)
+-Validaciones
+-Módulos
+-Angular Material
+-Y más...
