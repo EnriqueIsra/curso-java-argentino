@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Product } from '../models/product';
 
 @Component({
-  selector: 'app-products',
+  selector: 'table-products',
   imports: [],
   templateUrl: './products.html'
 })
 export class Products {
+  @Input() products: Product[] = []
   title = 'Listado de productos'
 }
