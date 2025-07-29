@@ -9,6 +9,8 @@
                 <th>name</th>
                 <th>description</th>
                 <th>price</th>
+                <th>update</th>
+                <th>remove</th>
             </tr>
         </thead>
     
@@ -19,6 +21,10 @@
                     <td>{{product.name}}</td>
                     <td>{{product.description}}</td>
                     <td>{{product.price}}</td>
+                    <td><button class="btn btn-sm btn-primary"
+                        (click)="onUpdateProduct(product)">Update</button></td>
+                    <td><button class="btn btn-sm btn-danger"
+                        (click)="onRemoveProduct(product.id)">Remove</button></td>
                 </tr>
     
             }
