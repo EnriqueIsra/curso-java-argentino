@@ -5,7 +5,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 @Component({
   selector: 'product-form',
   imports: [FormsModule],
-  templateUrl: './form.html',
+  templateUrl: './form.component.html',
 })
 export class Form {
 

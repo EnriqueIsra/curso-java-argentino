@@ -4,7 +4,7 @@ import { Product } from '../models/product';
 @Component({
   selector: 'table-products',
   imports: [],
-  templateUrl: './products.html'
+  templateUrl: './products.component.html'
 })
 export class Products {
   @Input() products: Product[] = []

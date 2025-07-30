@@ -1,36 +1,39 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Products } from './components/products';
+import { Products } from './components/products.component';
 import { Product } from './models/product';
-import { Form } from "./components/form";
+import { Form } from "./components/form.component";
 import Swal from 'sweetalert2';
+import { ProductService } from './services/product.service';
 
 @Component({
   selector: 'app-root',
   imports: [Products, Form],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 export class App implements OnInit {
   products: Product[] = []
   countId = signal(3)
   productSelected = { id: 0, name: '', description: '', price: 0 }
 
+  constructor(private service: ProductService) {}
   ngOnInit(): void {
-    this.products = [
-      {
-        id: 1,
-        name: 'Monitor Asus 35 pulgadas',
-        description: 'El monitor es excelente para juegos de alta resolución',
-        price: 1000
-      },
-      {
-        id: 2,
-        name: 'Iphone 16 pro',
-        description: 'El cel es excelente e incluye Apple Intelligence',
-        price: 1700
-      }
-    ]
+    this.service.findAll().subscribe(products => this.products = products)
+    // this.products = [
+    //   {
+    //     id: 1,
+    //     name: 'Monitor Asus 35 pulgadas',
+    //     description: 'El monitor es excelente para juegos de alta resolución',
+    //     price: 1000
+    //   },
+    //   {
+    //     id: 2,
+    //     name: 'Iphone 16 pro',
+    //     description: 'El cel es excelente e incluye Apple Intelligence',
+    //     price: 1700
+    //   }
+    // ]
   }
 
   addProduct(product: Product) {
