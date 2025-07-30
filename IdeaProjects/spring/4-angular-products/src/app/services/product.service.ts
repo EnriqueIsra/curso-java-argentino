@@ -16,4 +16,16 @@ export class ProductService {
       map( (response: any) => response as Product[] )
     )
   }
+
+  create(product: Product): Observable<Product> {
+    console.log(product)
+    return this.http.post<Product>(this.url, product);
+  }  
+
+  update(product: Product): Observable<Product> {
+    return this.http.put<Product>(`${this.url}/${product.id}`, product);
+  }
+  remove(id: number): Observable<Product> {
+    return this.http.delete<Product>(`${this.url}/${id}`);
+  }
 }

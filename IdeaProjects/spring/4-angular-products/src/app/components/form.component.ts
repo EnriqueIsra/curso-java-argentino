@@ -9,12 +9,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class Form {
 
-  @Input() product: Product = {
-    id: 0,
-    name: '',
-    description: '',
-    price: 0
-  };
+  @Input() product: Product = new Product()
 
   @Output() addProductEvent = new EventEmitter();
 
@@ -29,11 +24,6 @@ export class Form {
   }
 
   clean(): void {
-    this.product = {
-      id: 0,
-      name: '',
-      description: '',
-      price: 0
-    }
+    this.product = new Product()
   }
 }

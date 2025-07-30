@@ -15,7 +15,7 @@ import { ProductService } from './services/product.service';
 export class App implements OnInit {
   products: Product[] = []
   countId = signal(3)
-  productSelected = { id: 0, name: '', description: '', price: 0 }
+  productSelected: Product = new Product();
 
   constructor(private service: ProductService) {}
   ngOnInit(): void {
@@ -39,25 +39,30 @@ export class App implements OnInit {
   addProduct(product: Product) {
 
     if (product.id > 0) {
-      this.products = this.products.map(prod => {
-        if (prod.id == product.id) {
-          return product
-        }
-        return prod;
+
+      this.service.update(product).subscribe(productUpdated => {
+        this.products = this.products.map(prod => {
+          if (prod.id == product.id) {
+            return productUpdated
+          }
+          return prod;
+        })
+        Swal.fire({
+          title: "¡Producto Actualizado!",
+          text: `¡Producto ${productUpdated.name} actualizado exitosamente!`,
+          icon: "success"
+        });
       })
-      Swal.fire({
-        title: "¡Producto Actualizado!",
-        text: "¡Producto actualizado exitosamente!",
-        icon: "success"
-      });
     } else {
-      this.products = [... this.products, { ...product, id: this.countId() }];
-      this.countId.update(id => id + 1);
-      Swal.fire({
-        title: "¡Producto Creado!",
-        text: "¡Producto creado exitosamente!",
-        icon: "success"
-      });
+      this.service.create(product).subscribe(productNew => {
+        this.products = [... this.products, { ...productNew}];
+        // this.countId.update(id => id + 1);
+        Swal.fire({
+          title: "¡Producto Creado!",
+          text: `¡Producto ${productNew.name} creado exitosamente!`,
+          icon: "success"
+        });
+      })
     }
   }
 
@@ -77,12 +82,14 @@ export class App implements OnInit {
       cancelButtonText: "¡No, cancelar!"
     }).then((result) => {
       if (result.isConfirmed) {
-        this.products = this.products.filter(product => product.id != id)
-        Swal.fire({
-          title: "¡Producto Eliminado!",
-          text: "¡Producto eliminado exitosamente!",
-          icon: "success"
-        });
+        this.service.remove(id).subscribe(productDeleted => {
+          this.products = this.products.filter(product => product.id != id)
+          Swal.fire({
+            title: "¡Producto Eliminado!",
+            text: `¡Producto ${productDeleted.name} eliminado exitosamente!`,
+            icon: "success"
+          });
+        })
       }
     });
 
