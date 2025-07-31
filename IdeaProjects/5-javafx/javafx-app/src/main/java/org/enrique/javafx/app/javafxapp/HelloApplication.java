@@ -3,8 +3,9 @@ package org.enrique.javafx.app.javafxapp;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,15 +35,38 @@ public class HelloApplication extends Application {
         descColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        tableView.getColumns().addAll(nameColumn, descColumn, priceColumn);
-        tableView.setItems(this.products);
+
+
+        TableColumn<Product, Void> deleteColumn = new TableColumn<>("Eliminar");
+        deleteColumn.setCellFactory(param -> new TableCell<>(){
+            private final Button deleteButton = new Button("Eliminar");
+            {
+                deleteButton.setOnAction(event -> {
+                    Product product = getTableView().getItems().get(getIndex());
+                    tableView.getItems().remove(product );
+                });
+            }
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty){
+                    setGraphic(null);
+                } else {
+                    setGraphic(deleteButton);
+                }
+            }
+        });
 
         VBox vBox = new VBox(tableView);
-        Scene scene = new Scene(vBox, 320, 240);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(vBox, 620, 440);
+        stage.setTitle("Gestión de Productos!");
         stage.setScene(scene);
         stage.show();
+
+        tableView.getColumns().addAll(nameColumn, descColumn, priceColumn, deleteColumn);
+        tableView.setItems(this.products);
     }
+
 
     public static void main(String[] args) {
         launch();

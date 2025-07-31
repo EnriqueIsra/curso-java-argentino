@@ -1,8 +1,9 @@
 module org.enrique.javafx.app.javafxapp {
     requires javafx.controls;
-    requires javafx.fxml;
+    requires javafx.base;
 
 
-    opens org.enrique.javafx.app.javafxapp to javafx.fxml;
+    opens org.enrique.javafx.app.javafxapp to javafx.base;
+    opens org.enrique.javafx.app.javafxapp.models to javafx.base;
     exports org.enrique.javafx.app.javafxapp;
 }
