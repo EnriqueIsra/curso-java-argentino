@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    private ObservableList<Product> products = FXCollections.observableArrayList(
+    private final ObservableList<Product> products = FXCollections.observableArrayList(
             new Product("Teclado", "desc ...", 1000L),
             new Product("Mouse", "desc para mouse ...", 500L),
             new Product("CPU", "desc i7 ...", 2000L),
@@ -24,9 +24,13 @@ public class HelloApplication extends Application {
             new Product("Monitor", "monitor asus increible ...", 1500L)
     );
 
-    private TextField nameField = new TextField();
-    private TextField descField = new TextField();
-    private TextField priceField = new TextField();
+    private Product productSelected = null;
+
+    private final TextField nameField = new TextField();
+    private final TextField descField = new TextField();
+    private final TextField priceField = new TextField();
+    private final Button addButton = new Button("Agregar");
+
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -40,20 +44,21 @@ public class HelloApplication extends Application {
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
 
-
         TableColumn<Product, Void> deleteColumn = new TableColumn<>("Eliminar");
-        deleteColumn.setCellFactory(param -> new TableCell<>(){
+        deleteColumn.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button("Eliminar");
+
             {
                 deleteButton.setOnAction(event -> {
                     Product product = getTableView().getItems().get(getIndex());
-                    tableView.getItems().remove(product );
+                    tableView.getItems().remove(product);
                 });
             }
+
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty){
+                if (empty) {
                     setGraphic(null);
                 } else {
                     setGraphic(deleteButton);
@@ -61,23 +66,59 @@ public class HelloApplication extends Application {
             }
         });
 
-        tableView.getColumns().addAll(nameColumn, descColumn, priceColumn, deleteColumn);
+        TableColumn<Product, Void> editColumn = new TableColumn<>("Editar");
+        editColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button editButton = new Button("Editar");
+
+            {
+                editButton.setOnAction(event -> {
+                    productSelected = getTableView().getItems().get(getIndex());
+                    nameField.setText(productSelected.getName());
+                    descField.setText(productSelected.getDescription());
+                    priceField.setText(String.valueOf(productSelected.getPrice()));
+                    addButton.setText("Editar");
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(editButton);
+                }
+            }
+        });
+
+        tableView.getColumns().addAll(nameColumn, descColumn, priceColumn, deleteColumn, editColumn);
         tableView.setItems(this.products);
 
         nameField.setPromptText("Nombre");
         descField.setPromptText("Descripción");
         priceField.setPromptText("Precio");
 
-        Button addButton = new Button("Agregar");
         addButton.setOnAction(event -> {
             String name = nameField.getText();
             String desc = descField.getText();
             String priceText = priceField.getText();
 
-            if (!name.isBlank() && !desc.isBlank() && !priceText.isBlank()){
+            if (!name.isBlank() && !desc.isBlank() && !priceText.isBlank()) {
                 try {
                     Long price = Long.parseLong(priceText);
-                    products.add(new Product(name, desc, price));
+
+                    if (productSelected == null) {
+                        products.add(new Product(name, desc, price));
+
+                    } else {
+                        productSelected.setName(name);
+                        productSelected.setDescription(desc);
+                        productSelected.setPrice(price);
+                        tableView.refresh();
+                        productSelected = null;
+                        addButton.setText("Agregar");
+
+                    }
 
                     nameField.clear();
                     descField.clear();
@@ -85,16 +126,27 @@ public class HelloApplication extends Application {
 
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "El precio debe ser un número valido");
+                    alert.show();
                 }
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Debe completar todos los cambios");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Debe completar todos los campos");
+                alert.show();
             }
         });
 
-        HBox formBox = new HBox(10, nameField, descField, priceField, addButton);
+        Button clearButton = new Button("Limpiar");
+        clearButton.setOnAction(event -> {
+            productSelected = null;
+            addButton.setText("Agregar");
+            nameField.clear();
+            descField.clear();
+            priceField.clear();
+        });
+
+        HBox formBox = new HBox(10, nameField, descField, priceField, addButton, clearButton);
         formBox.setPadding(new Insets(10));
         VBox vBox = new VBox(formBox, tableView);
-        Scene scene = new Scene(vBox, 620, 440);
+        Scene scene = new Scene(vBox, 650, 450);
         stage.setTitle("Gestión de Productos!");
         stage.setScene(scene);
         stage.show();
