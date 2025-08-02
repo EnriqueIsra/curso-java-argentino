@@ -3,12 +3,11 @@ package org.enrique.javafx.app.javafxapp;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.enrique.javafx.app.javafxapp.models.Product;
@@ -24,6 +23,11 @@ public class HelloApplication extends Application {
             new Product("Memoria RAM", "desc de 32 GB...", 800L),
             new Product("Monitor", "monitor asus increible ...", 1500L)
     );
+
+    private TextField nameField = new TextField();
+    private TextField descField = new TextField();
+    private TextField priceField = new TextField();
+
     @Override
     public void start(Stage stage) throws IOException {
         TableView<Product> tableView = new TableView<>();
@@ -57,14 +61,44 @@ public class HelloApplication extends Application {
             }
         });
 
-        VBox vBox = new VBox(tableView);
+        tableView.getColumns().addAll(nameColumn, descColumn, priceColumn, deleteColumn);
+        tableView.setItems(this.products);
+
+        nameField.setPromptText("Nombre");
+        descField.setPromptText("Descripción");
+        priceField.setPromptText("Precio");
+
+        Button addButton = new Button("Agregar");
+        addButton.setOnAction(event -> {
+            String name = nameField.getText();
+            String desc = descField.getText();
+            String priceText = priceField.getText();
+
+            if (!name.isBlank() && !desc.isBlank() && !priceText.isBlank()){
+                try {
+                    Long price = Long.parseLong(priceText);
+                    products.add(new Product(name, desc, price));
+
+                    nameField.clear();
+                    descField.clear();
+                    priceField.clear();
+
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "El precio debe ser un número valido");
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Debe completar todos los cambios");
+            }
+        });
+
+        HBox formBox = new HBox(10, nameField, descField, priceField, addButton);
+        formBox.setPadding(new Insets(10));
+        VBox vBox = new VBox(formBox, tableView);
         Scene scene = new Scene(vBox, 620, 440);
         stage.setTitle("Gestión de Productos!");
         stage.setScene(scene);
         stage.show();
 
-        tableView.getColumns().addAll(nameColumn, descColumn, priceColumn, deleteColumn);
-        tableView.setItems(this.products);
     }
 
 
