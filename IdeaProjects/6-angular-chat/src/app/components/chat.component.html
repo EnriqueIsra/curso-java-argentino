@@ -1,1 +1,31 @@
-<p>chat works!</p>
+<div class="card m-4">
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item" *ngIf="!connected">
+                <button type="button" class="btn btn-success" (click)="connect()">Conectar</button>
+            </li>
+            <li class="nav-item" *ngIf="connected">
+                <button type="button" class="btn btn-warning" (click)="deconnect()">Desconectar</button>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body" style="overflow-y: scroll; height: 360px;" *ngIf="connected">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-light" *ngFor="let message of messages">
+                {{message.date | date: 'shortTime'}}: {{message.text}}
+            </li>
+        </ul>
+    </div>
+    <div class="card-footer" *ngIf="connected">
+        <form (ngSubmit)="onSendMessage()">
+            <div class="row">
+                <div class="col">
+                    <input class="form-control" name="text" [(ngModel)]="message.text">
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
