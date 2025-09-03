@@ -15,6 +15,7 @@ export class ChatComponent implements OnInit {
   connected: boolean = false;
   messages: Message[] = [];
   message: Message = new Message();
+  writing!: string;
 
   ngOnInit(): void {
     this.client = new Stomp.Client({
@@ -36,6 +37,11 @@ export class ChatComponent implements OnInit {
           this.message.color = message.color
         }
         this.messages.push(message);
+      })
+
+      this.client.subscribe("/chat/writing", event => {
+        this.writing = event.body;
+        setTimeout(() => this.writing = '', 3000)
       })
 
       this.message.type = "NEW_USER"
@@ -68,6 +74,13 @@ export class ChatComponent implements OnInit {
       body: JSON.stringify(this.message)
     })
     this.message.text = '';
+  }
+
+  onWritingEvent(): void {
+    this.client.publish({
+      destination: '/app/writing',
+      body: this.message.username
+    })
   }
 
 }
