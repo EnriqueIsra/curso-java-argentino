@@ -16,12 +16,16 @@ export class ChatComponent implements OnInit {
   messages: Message[] = [];
   message: Message = new Message();
   writing!: string;
+  clientId!: string;
+  constructor(){
+    this.clientId = 'id-' + new Date().getTime() + '-' + Math.random().toString(36).substring(2);
+  }
 
   ngOnInit(): void {
     this.client = new Stomp.Client({
       brokerURL: undefined,
       webSocketFactory: () => new SockJS('http://localhost:8080/chat-websocket'),
-      debug: str => console.log(str),
+      //debug: str => console.log(str),
       reconnectDelay: 5000
     })
 
@@ -42,6 +46,17 @@ export class ChatComponent implements OnInit {
       this.client.subscribe("/chat/writing", event => {
         this.writing = event.body;
         setTimeout(() => this.writing = '', 3000)
+      })
+
+      console.log('clientId: ' + this.clientId);
+      this.client.subscribe(`/chat/history/${this.clientId}`, event => {
+        const histories = JSON.parse(event.body) as Message[];
+        this.messages = histories;
+      })
+
+      this.client.publish({
+        destination: '/app/history',
+        body: this.clientId
       })
 
       this.message.type = "NEW_USER"
