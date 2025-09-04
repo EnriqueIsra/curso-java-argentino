@@ -3,6 +3,7 @@ package com.enrique.springboot.backend.chat.app.controllers;
 import com.enrique.springboot.backend.chat.app.models.Message;
 import com.enrique.springboot.backend.chat.app.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -22,7 +23,7 @@ public class ChatController {
     @Autowired
     private SimpMessagingTemplate webSocket;
 
-    public ChatController(MessageService service) {
+    public ChatController(@Qualifier("messageServiceMongo") MessageService service) {
         this.service = service;
     }
 
