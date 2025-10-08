@@ -16,14 +16,31 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+import org.springframework.messaging.converter.MessageConverter;
+import org.springframework.messaging.converter.SimpleMessageConverter;
+import org.springframework.messaging.simp.stomp.StompFrameHandler;
+import org.springframework.messaging.simp.stomp.StompHeaders;
+import org.springframework.messaging.simp.stomp.StompSession;
+import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
+import org.springframework.web.socket.client.standard.StandardWebSocketClient;
+import org.springframework.web.socket.messaging.WebSocketStompClient;
+import org.springframework.web.socket.sockjs.client.SockJsClient;
+import org.springframework.web.socket.sockjs.client.Transport;
+import org.springframework.web.socket.sockjs.client.WebSocketClientSockJsSession;
+import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class ChatApplication extends Application {
 
     private Message message = new Message();
+
+    private String clientId;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -48,56 +65,100 @@ public class ChatApplication extends Application {
         HBox footer = new HBox(10, messageField, sendButton, deConnButton);
         footer.setVisible(false);
 
-        connButton.setOnAction(event ->{
-            if (!usernameField.getText().isBlank()) {
-                this.message.setUsername(usernameField.getText());
-                System.out.println(usernameField.getText());
-                chat.setVisible(true);
-                scrollPane.setVisible(true);
-                footer.setVisible(true);
+        List<Transport> transports = List.of(new WebSocketTransport(new StandardWebSocketClient()));
+        WebSocketStompClient stompClient = new WebSocketStompClient(new SockJsClient(transports));
+        List<MessageConverter> converters = List.of(new SimpleMessageConverter(), new MappingJackson2MessageConverter());
 
-                usernameField.setVisible(false);
-                connButton.setVisible(false);
+        connButton.setOnAction(event -> {
+            if (!usernameField.getText().isBlank()) {
+                stompClient.connectAsync("http://localhost:8080/chat-websocket", new StompSessionHandlerAdapter() {
+                    @Override
+                    public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
+                        clientId = session.getSessionId();
+                        message.setUsername(usernameField.getText());
+                        System.out.println(usernameField.getText());
+                        chat.setVisible(true);
+                        scrollPane.setVisible(true);
+                        footer.setVisible(true);
+
+                        usernameField.setVisible(false);
+                        connButton.setVisible(false);
+                        System.out.println("Conectado: " + session.isConnected() + " id: " + session.getSessionId());
+
+                        session.subscribe("/chat/message", new StompFrameHandler() {
+                            @Override
+                            public Type getPayloadType(StompHeaders headers) {
+                                return Message.class;
+                            }
+
+                            @Override
+                            public void handleFrame(StompHeaders headers, Object payload) {
+                                Message messagePayload = (Message) payload;
+
+                                SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
+                                String time = format.format(messagePayload.getDate());
+                                Text username = new Text(messagePayload.getUsername());
+                                username.setFill(Color.web(messagePayload.getColor()));
+                                username.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+
+                                TextFlow textFlow = null;
+
+                                if (messagePayload.getType().equals("MESSAGE")) {
+                                    textFlow = new TextFlow(new Text(time + " @"));
+                                    textFlow.getChildren().add(username);
+                                    textFlow.getChildren().add(new Text(" dice: \n".concat(message.getText())));
+                                } else if (messagePayload.getType().equals("NEW_USER")) {
+                                    textFlow = new TextFlow(new Text(time + ": " + messagePayload.getText()));
+                                    textFlow.getChildren().add(new Text(" conectado @"));
+                                    textFlow.getChildren().add(username);
+                                }
+
+                                chat.getChildren().add(textFlow);
+                            }
+                        });
+                        message.setType("NEW_USER");
+                        session.send("/app/message", message);
+
+                        sendButton.setOnAction(event -> {
+                            if (!messageField.getText().isBlank()) {
+                                message.setType("MESSAGE");
+                                message.setText(messageField.getText());
+                                session.send("/app/message", message);
+                                messageField.setText("");
+
+                            } else {
+                                Alert alert = new Alert(Alert.AlertType.ERROR, "Favor de ingresar un mensaje");
+                                alert.show();
+                            }
+                        });
+
+                        deConnButton.setOnAction(event -> {
+                            if(session.isConnected()){
+                                session.disconnect();
+                            }
+                            chat.setVisible(false);
+                            chat.getChildren().clear();
+                            scrollPane.setVisible(false);
+                            footer.setVisible(false);
+
+                            usernameField.setVisible(true);
+                            connButton.setVisible(true);
+
+                            message = new Message();
+                            messageField.setText("");
+                        });
+                    }
+                });
+
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Favor de ingresar el nombre de usuario");
                 alert.show();
             }
         });
 
-        deConnButton.setOnAction(event -> {
-            chat.setVisible(false);
-            chat.getChildren().clear();
-            scrollPane.setVisible(false);
-            footer.setVisible(false);
 
-            usernameField.setVisible(true);
-            connButton.setVisible(true);
 
-            this.message = new Message();
-            messageField.setText("");
-        });
 
-        sendButton.setOnAction(event -> {
-            if(!messageField.getText().isBlank()) {
-                this.message.setType("MESSAGE");
-                this.message.setText(messageField.getText());
-                SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
-                String time = format.format(new Date().getTime());
-                Text username = new Text(message.getUsername());
-                username.setFill(Color.RED);
-                username.setFont(Font.font("Arial", FontWeight.BOLD, 12));
-
-                TextFlow textFlow = new TextFlow(new Text(time + " @"));
-                textFlow.getChildren().add(username);
-                textFlow.getChildren().add(new Text(" dice: \n".concat(message.getText())));
-
-                chat.getChildren().add(textFlow);
-                messageField.setText("");
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Favor de ingresar un mensaje");
-                alert.show();
-            }
-        });
 
         VBox panel = new VBox(10, header, scrollPane, footer);
         panel.setPadding(new Insets(10));
