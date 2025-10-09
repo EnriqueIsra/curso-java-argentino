@@ -2,6 +2,7 @@ package com.enriqueitm.curso.javafx.chatapp.appjavafxchat;
 
 import com.enriqueitm.curso.javafx.chatapp.appjavafxchat.models.Message;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -33,6 +34,7 @@ import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -97,25 +99,57 @@ public class ChatApplication extends Application {
 
                                 SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
                                 String time = format.format(messagePayload.getDate());
-                                Text username = new Text(messagePayload.getUsername());
-                                username.setFill(Color.web(messagePayload.getColor()));
-                                username.setFont(Font.font("Arial", FontWeight.BOLD, 12));
 
-                                TextFlow textFlow = null;
+                                Platform.runLater(() -> {
+                                    Text username = new Text(messagePayload.getUsername());
+                                    username.setFill(Color.web(messagePayload.getColor()));
+                                    username.setFont(Font.font("Arial", FontWeight.BOLD, 12));
 
-                                if (messagePayload.getType().equals("MESSAGE")) {
-                                    textFlow = new TextFlow(new Text(time + " @"));
-                                    textFlow.getChildren().add(username);
-                                    textFlow.getChildren().add(new Text(" dice: \n".concat(message.getText())));
-                                } else if (messagePayload.getType().equals("NEW_USER")) {
-                                    textFlow = new TextFlow(new Text(time + ": " + messagePayload.getText()));
-                                    textFlow.getChildren().add(new Text(" conectado @"));
-                                    textFlow.getChildren().add(username);
-                                }
+                                    TextFlow textFlow = null;
 
-                                chat.getChildren().add(textFlow);
+                                    if (messagePayload.getType().equals("MESSAGE")) {
+                                        textFlow = new TextFlow(new Text(time + " @"));
+                                        textFlow.getChildren().add(username);
+                                        textFlow.getChildren().add(new Text(" dice: \n".concat(message.getText())));
+                                    } else if (messagePayload.getType().equals("NEW_USER")) {
+                                        textFlow = new TextFlow(new Text(time + ": " + messagePayload.getText()));
+                                        textFlow.getChildren().add(new Text(" conectado @"));
+                                        textFlow.getChildren().add(username);
+                                    }
+
+                                    chat.getChildren().add(textFlow);
+                                });
                             }
                         });
+                        session.subscribe("/chat/history/".concat(clientId), new StompFrameHandler() {
+                            @Override
+                            public Type getPayloadType(StompHeaders headers) {
+                                return Message[].class;
+                            }
+
+                            @Override
+                            public void handleFrame(StompHeaders headers, Object payload) {
+                                List<Message> messages = Arrays.asList((Message[]) payload);
+                                Platform.runLater(() -> {
+                                    for (Message messagePayload : messages){
+                                        Text username = new Text(messagePayload.getUsername());
+                                        username.setFill(Color.web(messagePayload.getColor()));
+                                        username.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+
+                                        String time = new SimpleDateFormat("hh:mm:ss a").format(messagePayload.getDate());
+
+                                        TextFlow textFlow = new TextFlow(new Text(time + " @"));
+                                        textFlow.getChildren().add(username);
+                                        textFlow.getChildren().add(new Text(" dice: \n".concat(message.getText())));
+
+                                        chat.getChildren().add(textFlow);
+                                    }
+                                });
+                            }
+                        });
+                        
+                        session.send("/app/history", clientId);
+
                         message.setType("NEW_USER");
                         session.send("/app/message", message);
 
@@ -147,7 +181,9 @@ public class ChatApplication extends Application {
                             message = new Message();
                             messageField.setText("");
                         });
+
                     }
+
                 });
 
             } else {
