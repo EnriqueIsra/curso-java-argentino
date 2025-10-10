@@ -4,6 +4,7 @@ import com.enrique.springboot.backend.chat.app.models.Message;
 import com.enrique.springboot.backend.chat.app.repositories.MessageRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -17,7 +18,9 @@ public class MessageServiceMongo implements MessageService{
 
     @Override
     public List<Message> findAll() {
-        return repository.findFirst10ByOrderByDateAsc();
+        List<Message> messages = repository.findFirst10ByOrderByDateDesc();
+        Collections.reverse(messages);
+        return messages;
     }
 
     @Override

@@ -92,48 +92,6 @@ public class ChatApplication extends Application {
                         connButton.setVisible(false);
                         System.out.println("Conectado: " + session.isConnected() + " id: " + session.getSessionId());
 
-                        // Subscribirse a mensajes normales
-                        session.subscribe("/chat/message", new StompFrameHandler() {
-                            @Override
-                            public Type getPayloadType(StompHeaders headers) {
-                                return Message.class;
-                            }
-
-                            @Override
-                            public void handleFrame(StompHeaders headers, Object payload) {
-                                Message messagePayload = (Message) payload;
-
-                                SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
-                                String time = format.format(messagePayload.getDate());
-
-                                if (message.getUsername().equals(messagePayload.getUsername())
-                                        && message.getColor() == null
-                                        && messagePayload.getType().equals("NEW_USER")) {
-                                    message.setColor(messagePayload.getColor());
-                                }
-
-                                Platform.runLater(() -> {
-                                    Text username = new Text(messagePayload.getUsername());
-                                    username.setFill(Color.web(messagePayload.getColor()));
-                                    username.setFont(Font.font("Arial", FontWeight.BOLD, 12));
-
-                                    TextFlow textFlow;
-
-                                    if (messagePayload.getType().equals("MESSAGE")) {
-                                        textFlow = new TextFlow(new Text(time + " @"));
-                                        textFlow.getChildren().add(username);
-                                        textFlow.getChildren().add(new Text(" dice: \n".concat(messagePayload.getText())));
-                                    } else { // NEW_USER
-                                        textFlow = new TextFlow(new Text(time + ": " + messagePayload.getText()));
-                                        textFlow.getChildren().add(new Text(" conectado @"));
-                                        textFlow.getChildren().add(username);
-                                    }
-
-                                    addMessageToChat(chat, scrollPane, textFlow);
-                                });
-                            }
-                        });
-
                         // Subscribirse al historial
                         session.subscribe("/chat/history/".concat(clientId), new StompFrameHandler() {
                             @Override
@@ -158,6 +116,48 @@ public class ChatApplication extends Application {
 
                                         addMessageToChat(chat, scrollPane, textFlow);
                                     }
+
+                                    // Subscribirse a mensajes normales
+                                    session.subscribe("/chat/message", new StompFrameHandler() {
+                                        @Override
+                                        public Type getPayloadType(StompHeaders headers) {
+                                            return Message.class;
+                                        }
+
+                                        @Override
+                                        public void handleFrame(StompHeaders headers, Object payload) {
+                                            Message messagePayload = (Message) payload;
+
+                                            SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
+                                            String time = format.format(messagePayload.getDate());
+
+                                            if (message.getUsername().equals(messagePayload.getUsername())
+                                                    && message.getColor() == null
+                                                    && messagePayload.getType().equals("NEW_USER")) {
+                                                message.setColor(messagePayload.getColor());
+                                            }
+
+                                            Platform.runLater(() -> {
+                                                Text username = new Text(messagePayload.getUsername());
+                                                username.setFill(Color.web(messagePayload.getColor()));
+                                                username.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+
+                                                TextFlow textFlow;
+
+                                                if (messagePayload.getType().equals("MESSAGE")) {
+                                                    textFlow = new TextFlow(new Text(time + " @"));
+                                                    textFlow.getChildren().add(username);
+                                                    textFlow.getChildren().add(new Text(" dice: \n".concat(messagePayload.getText())));
+                                                } else { // NEW_USER
+                                                    textFlow = new TextFlow(new Text(time + ": " + messagePayload.getText()));
+                                                    textFlow.getChildren().add(new Text(" conectado @"));
+                                                    textFlow.getChildren().add(username);
+                                                }
+
+                                                addMessageToChat(chat, scrollPane, textFlow);
+                                            });
+                                        }
+                                    });
 
                                     // Una vez cargado el historial, ahora si mandamos NEW_USER
                                     message.setType("NEW_USER");
@@ -226,7 +226,7 @@ public class ChatApplication extends Application {
         VBox pane = new VBox(10, header, scrollPane, footer, writing);
         pane.setPadding(new Insets(10));
 
-        Scene scene = new Scene(pane, 380, 200);
+        Scene scene = new Scene(pane, 380, 350);
         stage.setTitle("¡Chat Web Socket con Spring Boot!");
         stage.setScene(scene);
         stage.show();
