@@ -40,7 +40,13 @@ public class ChatApplication extends Application {
     private Message message = new Message();
     private String clientId;
     private final Label writing = new Label();
-    
+
+    private void addMessageToChat(VBox chat, ScrollPane scrollPane, TextFlow textFlow) {
+        chat.getChildren().add(textFlow);
+        // Forzar actualización del layout y hacer autoscroll al final
+        scrollPane.layout();
+        scrollPane.setVvalue(1.0);
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -86,6 +92,7 @@ public class ChatApplication extends Application {
                         connButton.setVisible(false);
                         System.out.println("Conectado: " + session.isConnected() + " id: " + session.getSessionId());
 
+                        // Subscribirse a mensajes normales
                         session.subscribe("/chat/message", new StompFrameHandler() {
                             @Override
                             public Type getPayloadType(StompHeaders headers) {
@@ -104,27 +111,30 @@ public class ChatApplication extends Application {
                                         && messagePayload.getType().equals("NEW_USER")) {
                                     message.setColor(messagePayload.getColor());
                                 }
+
                                 Platform.runLater(() -> {
                                     Text username = new Text(messagePayload.getUsername());
                                     username.setFill(Color.web(messagePayload.getColor()));
                                     username.setFont(Font.font("Arial", FontWeight.BOLD, 12));
 
-                                    TextFlow textFlow = null;
+                                    TextFlow textFlow;
 
                                     if (messagePayload.getType().equals("MESSAGE")) {
                                         textFlow = new TextFlow(new Text(time + " @"));
                                         textFlow.getChildren().add(username);
                                         textFlow.getChildren().add(new Text(" dice: \n".concat(messagePayload.getText())));
-                                    } else if (messagePayload.getType().equals("NEW_USER")) {
+                                    } else { // NEW_USER
                                         textFlow = new TextFlow(new Text(time + ": " + messagePayload.getText()));
-                                        textFlow.getChildren().add(username);
                                         textFlow.getChildren().add(new Text(" conectado @"));
+                                        textFlow.getChildren().add(username);
                                     }
 
-                                    chat.getChildren().add(textFlow);
+                                    addMessageToChat(chat, scrollPane, textFlow);
                                 });
                             }
                         });
+
+                        // Subscribirse al historial
                         session.subscribe("/chat/history/".concat(clientId), new StompFrameHandler() {
                             @Override
                             public Type getPayloadType(StompHeaders headers) {
@@ -146,8 +156,13 @@ public class ChatApplication extends Application {
                                         textFlow.getChildren().add(username);
                                         textFlow.getChildren().add(new Text(" dice: \n".concat(messagePayload.getText())));
 
-                                        chat.getChildren().add(textFlow);
+                                        addMessageToChat(chat, scrollPane, textFlow);
                                     }
+
+                                    // Una vez cargado el historial, ahora si mandamos NEW_USER
+                                    message.setType("NEW_USER");
+                                    message.setText("");
+                                    session.send("/app/message", message);
                                 });
                             }
                         });
@@ -161,13 +176,13 @@ public class ChatApplication extends Application {
                             @Override
                             public void handleFrame(StompHeaders headers, Object payload) {
                                 Platform.runLater(() -> writing.setText(payload.toString()));
-                                CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(() -> Platform.runLater(() -> writing.setText("")));
+                                CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS)
+                                        .execute(() -> Platform.runLater(() -> writing.setText("")));
                             }
                         });
-                        session.send("/app/history", clientId);
 
-                        message.setType("NEW_USER");
-                        session.send("/app/message", message);
+                        // Pedir historial
+                        session.send("/app/history", clientId);
 
                         sendButton.setOnAction(event -> {
                             if (!messageField.getText().isBlank()) {
@@ -175,7 +190,6 @@ public class ChatApplication extends Application {
                                 message.setText(messageField.getText());
                                 session.send("/app/message", message);
                                 messageField.setText("");
-
                             } else {
                                 Alert alert = new Alert(Alert.AlertType.ERROR, "Favor de ingresar un mensaje");
                                 alert.show();
@@ -202,15 +216,12 @@ public class ChatApplication extends Application {
                             session.send("/app/writing", message.getUsername());
                         });
                     }
-
                 });
-
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Favor de ingresar el nombre de usuario");
                 alert.show();
             }
         });
-
 
         VBox pane = new VBox(10, header, scrollPane, footer, writing);
         pane.setPadding(new Insets(10));
