@@ -5,10 +5,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -17,9 +14,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-import org.springframework.messaging.converter.MappingJackson2MessageConverter;
-import org.springframework.messaging.converter.MessageConverter;
-import org.springframework.messaging.converter.SimpleMessageConverter;
+import org.springframework.messaging.converter.*;
 import org.springframework.messaging.simp.stomp.StompFrameHandler;
 import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
@@ -37,12 +32,14 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 public class ChatApplication extends Application {
 
     private Message message = new Message();
-
     private String clientId;
+    private final Label writing = new Label();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -69,7 +66,8 @@ public class ChatApplication extends Application {
 
         List<Transport> transports = List.of(new WebSocketTransport(new StandardWebSocketClient()));
         WebSocketStompClient stompClient = new WebSocketStompClient(new SockJsClient(transports));
-        List<MessageConverter> converters = List.of(new SimpleMessageConverter(), new MappingJackson2MessageConverter());
+        List<MessageConverter> converters = List.of(new StringMessageConverter(), new MappingJackson2MessageConverter());
+        stompClient.setMessageConverter(new CompositeMessageConverter(converters));
 
         connButton.setOnAction(event -> {
             if (!usernameField.getText().isBlank()) {
@@ -100,6 +98,11 @@ public class ChatApplication extends Application {
                                 SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
                                 String time = format.format(messagePayload.getDate());
 
+                                if (message.getUsername().equals(messagePayload.getUsername())
+                                        && message.getColor() == null
+                                        && messagePayload.getType().equals("NEW_USER")) {
+                                    message.setColor(messagePayload.getColor());
+                                }
                                 Platform.runLater(() -> {
                                     Text username = new Text(messagePayload.getUsername());
                                     username.setFill(Color.web(messagePayload.getColor()));
@@ -110,7 +113,7 @@ public class ChatApplication extends Application {
                                     if (messagePayload.getType().equals("MESSAGE")) {
                                         textFlow = new TextFlow(new Text(time + " @"));
                                         textFlow.getChildren().add(username);
-                                        textFlow.getChildren().add(new Text(" dice: \n".concat(message.getText())));
+                                        textFlow.getChildren().add(new Text(" dice: \n".concat(messagePayload.getText())));
                                     } else if (messagePayload.getType().equals("NEW_USER")) {
                                         textFlow = new TextFlow(new Text(time + ": " + messagePayload.getText()));
                                         textFlow.getChildren().add(new Text(" conectado @"));
@@ -131,7 +134,7 @@ public class ChatApplication extends Application {
                             public void handleFrame(StompHeaders headers, Object payload) {
                                 List<Message> messages = Arrays.asList((Message[]) payload);
                                 Platform.runLater(() -> {
-                                    for (Message messagePayload : messages){
+                                    for (Message messagePayload : messages) {
                                         Text username = new Text(messagePayload.getUsername());
                                         username.setFill(Color.web(messagePayload.getColor()));
                                         username.setFont(Font.font("Arial", FontWeight.BOLD, 12));
@@ -140,14 +143,26 @@ public class ChatApplication extends Application {
 
                                         TextFlow textFlow = new TextFlow(new Text(time + " @"));
                                         textFlow.getChildren().add(username);
-                                        textFlow.getChildren().add(new Text(" dice: \n".concat(message.getText())));
+                                        textFlow.getChildren().add(new Text(" dice: \n".concat(messagePayload.getText())));
 
                                         chat.getChildren().add(textFlow);
                                     }
                                 });
                             }
                         });
-                        
+
+                        session.subscribe("/chat/writing", new StompFrameHandler() {
+                            @Override
+                            public Type getPayloadType(StompHeaders headers) {
+                                return String.class;
+                            }
+
+                            @Override
+                            public void handleFrame(StompHeaders headers, Object payload) {
+                                Platform.runLater(() -> writing.setText(payload.toString()));
+                                CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(() -> Platform.runLater(() -> writing.setText("")));
+                            }
+                        });
                         session.send("/app/history", clientId);
 
                         message.setType("NEW_USER");
@@ -167,7 +182,7 @@ public class ChatApplication extends Application {
                         });
 
                         deConnButton.setOnAction(event -> {
-                            if(session.isConnected()){
+                            if (session.isConnected()) {
                                 session.disconnect();
                             }
                             chat.setVisible(false);
@@ -182,6 +197,9 @@ public class ChatApplication extends Application {
                             messageField.setText("");
                         });
 
+                        messageField.setOnKeyTyped(event -> {
+                            session.send("/app/writing", message.getUsername());
+                        });
                     }
 
                 });
@@ -193,10 +211,7 @@ public class ChatApplication extends Application {
         });
 
 
-
-
-
-        VBox panel = new VBox(10, header, scrollPane, footer);
+        VBox panel = new VBox(10, header, scrollPane, footer, writing);
         panel.setPadding(new Insets(10));
 
         Scene scene = new Scene(panel, 680, 400);
