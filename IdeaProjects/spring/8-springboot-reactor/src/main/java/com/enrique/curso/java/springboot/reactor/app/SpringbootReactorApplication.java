@@ -1,6 +1,8 @@
 package com.enrique.curso.java.springboot.reactor.app;
 
+import com.enrique.curso.java.springboot.reactor.app.models.Comments;
 import com.enrique.curso.java.springboot.reactor.app.models.User;
+import com.enrique.curso.java.springboot.reactor.app.models.UserComments;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import org.slf4j.Logger;
@@ -27,7 +29,29 @@ public class SpringbootReactorApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        collectList();
+        userCommentsFlatMap();
+    }
+
+    
+    private void userCommentsFlatMap() {
+        Mono<User> userMono = Mono.fromCallable(this::createUser);
+        Mono<Comments> commentsMono = Mono.fromCallable(() -> {
+            Comments comments = new Comments();
+            comments.addComment("Hola soy el Sebitas cómo están?");
+            comments.addComment("Mañana nos vamos a la playa mi familia y yo");
+            comments.addComment("Mi papá está en la sección de spring boot con reactor");
+            return comments;
+        });
+
+        Mono<UserComments> userCommentsMono = userMono
+                .flatMap(user -> commentsMono
+                        .flatMap(comments -> Mono.fromCallable(() -> new UserComments(user, comments))));
+
+        userCommentsMono.subscribe(userComments -> log.info(userComments.toString()));
+    }
+
+    private User createUser() {
+        return new User("Alejandro", "Torres");
     }
 
     private void collectList(){
