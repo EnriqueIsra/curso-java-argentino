@@ -13,10 +13,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 public class SpringbootReactorApplication implements CommandLineRunner {
@@ -29,7 +32,37 @@ public class SpringbootReactorApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        userCommentsWithZip2();
+        delayElements();
+    }
+
+    private void delayElements() throws InterruptedException {
+        CountDownLatch counter = new CountDownLatch(1);
+        Flux<Integer> range = Flux.range(1, 12)
+                .delayElements(Duration.ofSeconds(2))
+                .doOnNext(value -> log.info(value.toString()))
+                .doOnTerminate(counter::countDown);
+        range.subscribe();
+        counter.await();
+
+        // TimeUnit.SECONDS.sleep(26);
+        // Thread.sleep(26000);
+    }
+    private void interval() {
+        Flux<Integer> range = Flux.range(1, 12);
+        Flux<Long> delay =Flux.interval(Duration.ofSeconds(1));
+        range.zipWith(delay, (first, second) -> first)
+                .doOnNext(value -> log.info(value.toString()))
+                .blockLast();
+    }
+
+    private void zipRange () {
+        Flux<Integer> range = Flux.range(1, 5);
+        Flux<Integer> numbers = Flux.just(1, 2, 3, 4, 5);
+
+        numbers.map(integer -> integer * 2)
+                .zipWith(range, (first, second) ->
+                        String.format("Primer flux: %d, Segundo flux: %d", first, second))
+                .subscribe(log::info);
     }
 
     private void userCommentsWithZip2(){
