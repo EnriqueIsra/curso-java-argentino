@@ -15,9 +15,7 @@ import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -32,7 +30,48 @@ public class SpringbootReactorApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        delayElements();
+        intervalFromCreate();
+    }
+    private void intervalFromCreate() {
+        Flux.create(emitter -> {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                private Integer counter = 0;
+                @Override
+                public void run() {
+                    emitter.next(++counter);
+                    /* if (counter.equals(10)){
+                        timer.cancel();
+                        emitter.complete();
+                    } */
+                    if (counter.equals(10)) {
+                        timer.cancel();
+                        emitter.error(new InterruptedException("Error, se ah detenido el flux"));
+                    }
+                }
+            },1000, 1000);
+        })
+                .doOnTerminate(() -> log.info("Hemos terminado..."))
+                .retry(2)
+                .subscribe(next -> log.info(next.toString()),
+                        error -> log.error(error.getMessage()),
+                        () -> log.info("Hemos terminado correctamente..."));
+    }
+
+    private void intervalInfinite() throws InterruptedException {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        Flux.interval(Duration.ofSeconds(1))
+                .doOnTerminate(countDownLatch::countDown)
+                .flatMap(value -> {
+                    if (value == 5) {
+                        return Flux.error(new InterruptedException("Solo hasta 5"));
+                    }
+                    return Flux.just(value);
+                })
+                .map(i -> "Hola ".concat(i.toString()))
+                .retry(2)
+                .subscribe(log::info, error -> log.error(error.getMessage()));
+        countDownLatch.await();
     }
 
     private void delayElements() throws InterruptedException {
