@@ -29,9 +29,45 @@ public class SpringbootReactorApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        userCommentsFlatMap();
+        userCommentsWithZip2();
     }
 
+    private void userCommentsWithZip2(){
+        Mono<User> userMono = Mono.fromCallable(this::createUser);
+        Mono<Comments> commentsMono = Mono.fromCallable(() -> {
+            Comments comments = new Comments();
+            comments.addComment("Hola soy el Sebitas cómo están?");
+            comments.addComment("Mañana nos vamos a la playa mi familia y yo");
+            comments.addComment("Mi papá está en la sección de spring boot con reactor");
+            return comments;
+        });
+
+        Mono<UserComments> userCommentsMono = userMono
+                .zipWith(commentsMono)
+                        // .map(tupla -> new UserComments(tupla.getT1(), tupla.getT2())); // o ...
+                        .map(tupla -> {
+                            User user = tupla.getT1();
+                            Comments comments = tupla.getT2();
+                            return new UserComments(user, comments);
+                        });
+        userCommentsMono.subscribe(System.out::println);
+    }
+
+    private void userCommentsWithZip(){
+        Mono<User> userMono = Mono.fromCallable(this::createUser);
+        Mono<Comments> commentsMono = Mono.fromCallable(() -> {
+            Comments comments = new Comments();
+            comments.addComment("Hola soy el Sebitas cómo están?");
+            comments.addComment("Mañana nos vamos a la playa mi familia y yo");
+            comments.addComment("Mi papá está en la sección de spring boot con reactor");
+            return comments;
+        });
+
+        Mono<UserComments> userCommentsMono = userMono.zipWith(
+                commentsMono, UserComments::new
+        );
+        userCommentsMono.subscribe(System.out::println);
+    }
     
     private void userCommentsFlatMap() {
         Mono<User> userMono = Mono.fromCallable(this::createUser);
