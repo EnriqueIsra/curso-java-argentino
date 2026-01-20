@@ -30,8 +30,43 @@ public class SpringbootReactorApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        intervalFromCreate();
+        backPressure();
     }
+
+    private void backPressure() {
+        Flux.range(1, 10)
+                .log()
+                // .limitRate(5)
+                // .subscribe(value -> log.info(value.toString()));
+                .subscribe(new Subscriber<Integer>() {
+                    private Subscription subscription;
+                    private final int limit = 3;
+                    private int consumed = 0;
+                    @Override
+                    public void onSubscribe(Subscription subscription) {
+                        this.subscription = subscription;
+                        this.subscription.request(limit);
+                    }
+                    @Override
+                    public void onNext(Integer element) {
+                        log.info(element.toString());
+                        consumed++;
+                        if (consumed == limit) {
+                            consumed = 0;
+                            this.subscription.request(limit);
+                        }
+                    }
+                    @Override
+                    public void onError(Throwable throwable) {
+
+                    }
+                    @Override
+                    public void onComplete() {
+                        log.info("Hemos finalizado el Flux");
+                    }
+                });
+    }
+
     private void intervalFromCreate() {
         Flux.create(emitter -> {
             Timer timer = new Timer();
