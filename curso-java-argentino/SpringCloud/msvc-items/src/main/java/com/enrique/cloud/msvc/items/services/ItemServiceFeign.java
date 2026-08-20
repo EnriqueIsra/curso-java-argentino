@@ -12,6 +12,8 @@ import com.enrique.cloud.msvc.items.clients.ProductFeignClient;
 import com.enrique.cloud.msvc.items.models.Item;
 import com.enrique.cloud.msvc.items.models.Product;
 
+import feign.FeignException;
+
 @Service
 public class ItemServiceFeign implements ItemService{
 
@@ -29,11 +31,12 @@ public class ItemServiceFeign implements ItemService{
 
     @Override
     public Optional<Item> findById(Long id) {
-        Product product = client.details(id);
-        if (product == null) {
+        try {
+            Product product = client.details(id);
+            return Optional.of(new Item(product, new Random().nextInt(10) + 1));   
+        } catch (FeignException e) {
             return Optional.empty();
         }
-        return Optional.of(new Item(product, new Random().nextInt(10) + 1));
     }
 
 }

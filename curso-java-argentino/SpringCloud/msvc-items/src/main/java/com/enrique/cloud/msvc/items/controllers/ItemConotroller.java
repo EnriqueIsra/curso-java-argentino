@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.enrique.cloud.msvc.items.models.Item;
 import com.enrique.cloud.msvc.items.services.ItemService;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,12 +30,16 @@ public class ItemConotroller {
     }
 
     @GetMapping("/{id}") 
-    public ResponseEntity<Item> details(@PathVariable Long id){
+    public ResponseEntity<?> details(@PathVariable Long id){
         Optional<Item> itemOptional = service.findById(id);
         if (itemOptional.isPresent()){
             return ResponseEntity.ok(itemOptional.get());
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity
+            .status(404)
+            .body(Collections.singletonMap(
+                "message", 
+                "No existe el producto en el microservicio msvc-products"));
     }
     
 
