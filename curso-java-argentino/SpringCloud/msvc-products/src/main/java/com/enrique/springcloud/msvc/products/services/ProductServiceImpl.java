@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public List<Product> findAll() {
         return ((List<Product>) repository.findAll()).stream().map(product -> {
-            product.setPort(Integer.parseInt(environment.getProperty("loca.server.port")));
+            product.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
             return product;
         }).collect(Collectors.toList());
     }
