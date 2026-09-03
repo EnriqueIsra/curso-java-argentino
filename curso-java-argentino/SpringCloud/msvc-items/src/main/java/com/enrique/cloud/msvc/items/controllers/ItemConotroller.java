@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,7 @@ public class ItemConotroller {
 
     private final ItemService service;
 
-    public ItemConotroller(ItemService service) {
+    public ItemConotroller(@Qualifier("itemServiceWebClient") ItemService service) {
         this.service = service;
     }
 
