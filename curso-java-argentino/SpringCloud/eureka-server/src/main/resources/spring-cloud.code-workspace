@@ -8,6 +8,10 @@
 		},
 		{
 			"path": "../../../../msvc-products"
+		},
+		{
+			"name": "msvc-gatewat-server",
+			"path": "../../../../msvc-gatewat-server"
 		}
 	],
 	"settings": {
