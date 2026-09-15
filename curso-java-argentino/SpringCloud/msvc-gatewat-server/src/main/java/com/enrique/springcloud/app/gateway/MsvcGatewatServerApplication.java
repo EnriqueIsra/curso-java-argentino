@@ -1,4 +1,4 @@
-package com.enrique.springcloud.app.gateway.msvc_gatewat_server;
+package com.enrique.springcloud.app.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
