@@ -1,10 +1,13 @@
 package com.enrique.springcloud.app.gateway.filters.factory;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
+import org.springframework.cloud.gateway.filter.OrderedGatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
@@ -20,7 +23,7 @@ public class SampleCookieGatewayFilterFactory extends AbstractGatewayFilterFacto
     }
     @Override
     public GatewayFilter apply(ConfigurationCookie config) {
-        return (exchange, chain) -> {
+        return new OrderedGatewayFilter((exchange, chain) -> {
             logger.info("ejecutando pre gateway filter factory: " + config.message);
 
             return chain.filter(exchange).then(Mono.fromRunnable(() -> {
@@ -30,7 +33,17 @@ public class SampleCookieGatewayFilterFactory extends AbstractGatewayFilterFacto
                 logger.info("ejecutando post gateway filter factory: " + config.message);
                 
             }));
-        };
+        }, 100);
+    }
+    
+    @Override
+    public List<String> shortcutFieldOrder() {
+        return Arrays.asList("message", "name", "value");
+    }
+
+    @Override
+    public String name() {
+        return "EjemploCookie";
     }
 
     public static class ConfigurationCookie {
