@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -26,7 +27,10 @@ public class ItemConotroller {
     }
 
     @GetMapping
-    public List<Item> list() {
+    public List<Item> list(@RequestParam(name = "name", required = false) String name,
+            @RequestHeader(name = "token-request", required = false) String token) {
+                System.out.println(name);
+                System.out.println(token);
         return service.findAll();
     }
 
